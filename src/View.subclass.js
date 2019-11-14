@@ -12,7 +12,7 @@ for maria.View.
             'squished': 'onSquished'
         },
         properties: {
-            anotherMethod: function() {
+            anotherMethod: function () {
                 alert('another method');
             }
         }
@@ -38,25 +38,25 @@ in this example).
         ...
 
 */
-maria.View.subclass = function(namespace, name, options) {
+maria.View.subclass = function (namespace, name, options) {
     options = options || {};
     var controllerConstructor = options.controllerConstructor;
     var controllerConstructorName = options.controllerConstructorName || name.replace(/(View|)$/, 'Controller');
     var modelActions = options.modelActions;
     var properties = options.properties || (options.properties = {});
     if (!Object.prototype.hasOwnProperty.call(properties, 'getDefaultControllerConstructor')) {
-        properties.getDefaultControllerConstructor = function() {
+        properties.getDefaultControllerConstructor = function () {
             /* DEBUG BEGIN */
             if ((!controllerConstructor) &&
                 (!Object.prototype.hasOwnProperty.call(namespace, controllerConstructorName))) {
-                console.error('Could not find controller class named "' + controllerConstructorName + '".');    
+                console.error('Could not find controller class named "' + controllerConstructorName + '".');
             }
             /* DEBUG END */
             return controllerConstructor || namespace[controllerConstructorName];
         };
     }
     if (modelActions && !Object.prototype.hasOwnProperty.call(properties, 'getModelActions')) {
-        properties.getModelActions = function() {
+        properties.getModelActions = function () {
             return modelActions;
         };
     }
